@@ -3,7 +3,7 @@
 
 int main()
 {
-    int bitsNeeded = 50, choice = -1, bitIndex;
+    int bitsNeeded = 32, choice = -1, bitIndex;
     BitArray *bitArray = new BitArray(bitsNeeded);
 
     while (true)
@@ -36,6 +36,7 @@ int main()
             break;
         case 5:
             bitArray->display();
+            bitArray->display(true);
             break;
         case 6:
             exit(0);

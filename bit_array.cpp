@@ -90,14 +90,21 @@ public:
         return;
     }
 
-    void display()
+    void display(bool pretty = false)
     {
         int i, size = this->bitsNeeded;
 
         printf("\n");
         for (i = 0; i < size; i++)
         {
-            printf((this->isBitSet(i)) ? "\x1b[33m1\x1b[0m" : "0");
+            if (pretty)
+            {
+                printf((this->isBitSet(i)) ? "\x1b[33m1\x1b[0m" : "0");
+            }
+            else
+            {
+                printf((this->isBitSet(i)) ? "1" : "0");
+            }
             if ((i + 1) % 8 == 0)
             {
                 printf(" ");
@@ -107,5 +114,45 @@ public:
         printf("\n");
 
         return;
+    }
+
+    BitArray *copy()
+    {
+        BitArray *copied = new BitArray(this->bitsNeeded);
+        int i;
+
+        for (i = 0; i < this->bitsNeeded; i++)
+        {
+            if (this->setBit(i))
+            {
+                copied->setBit(i);
+            }
+            else
+            {
+                copied->clearBit(i);
+            }
+        }
+
+        return copied;
+    }
+
+    vector<int> toArrayOfBits()
+    {
+        vector<int> result;
+        int i;
+
+        for (i = 0; i < this->bitsNeeded; i++)
+        {
+            if (this->setBit(i))
+            {
+                result.push_back(1);
+            }
+            else
+            {
+                result.push_back(0);
+            }
+        }
+
+        return result;
     }
 };
